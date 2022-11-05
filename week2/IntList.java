@@ -3,8 +3,8 @@ package week2;
 import static java.lang.System.out;
 
 public class IntList {
-    private int item;
-    private IntList next;
+    public int item;
+    public IntList next;
 
     public IntList(int i, IntList n) {
         item = i;

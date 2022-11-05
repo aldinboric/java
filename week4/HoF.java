@@ -2,7 +2,7 @@ package week4;
 
 import static java.lang.System.out;
 
-public class hof {
+public class HoF {
     public interface cl {
         int add(int b);
     }
