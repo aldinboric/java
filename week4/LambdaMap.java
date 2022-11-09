@@ -1,7 +1,7 @@
 package week4;
 
 import week4.MapClass.Map;
-import week4.MapClass.Abs;
+import week4.MapClass.Map;
 
 import java.util.Arrays;
 import static java.lang.System.out;
