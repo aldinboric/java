@@ -115,6 +115,19 @@ public class SLList {
         sentinel.next = tmp;
     }
 
+    public int deleteLast() {
+        if (sentinel.next == null)
+            return 0;
+        IntNode ptr = sentinel;
+        IntNode prev = null;
+        while (ptr.next != null) {
+            prev = ptr;
+            ptr = ptr.next;
+        }
+        prev.next = null;
+        return ptr.item;
+    }
+
     /** Printa listu. */
     public String print() {
         if (sentinel.next == null)
