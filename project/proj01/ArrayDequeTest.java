@@ -127,7 +127,7 @@ public class ArrayDequeTest {
 
     /** Testira liste na jednakost. */
     @Test
-    public void equalsTest() {
+    public void isEqualTest() {
         ArrayDeque<Integer> A1 = new ArrayDeque<>();
         for (int i = 0; i < 3; A1.addFirst(i), i += 1);
 
@@ -140,16 +140,16 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> A3 = new ArrayDeque<>();
         for (int i = 3; i > 0; A3.addFirst(i), i -= 1);
 
-        assertFalse(A1.equals(1));
-        assertFalse(A1.equals("Lista"));
-        assertFalse(A1.equals(L1));
-        assertTrue(A1.equals(A2));
-        assertFalse(A1.equals(A3));
+        assertFalse(A1.isEqual(1));
+        assertFalse(A1.isEqual("Lista"));
+        assertFalse(A1.isEqual(L1));
+        assertTrue(A1.isEqual(A2));
+        assertFalse(A1.isEqual(A3));
 
-        assertFalse(A1.simpleEquals(1));
-        assertFalse(A1.simpleEquals("Lista"));
-        assertFalse(A1.simpleEquals(L1));
-        assertTrue(A1.simpleEquals(A2));
-        assertFalse(A1.simpleEquals(A3));
+        assertFalse(A1.simpleIsEqual(1));
+        assertFalse(A1.simpleIsEqual("Lista"));
+        assertFalse(A1.simpleIsEqual(L1));
+        assertTrue(A1.simpleIsEqual(A2));
+        assertFalse(A1.simpleIsEqual(A3));
     }
 }

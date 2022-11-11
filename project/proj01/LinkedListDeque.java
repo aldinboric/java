@@ -5,7 +5,7 @@ import static java.lang.System.out;
 /* SType => Static Type. */
 
 /** Duplo uvezana generična lista. */
-public class LinkedListDeque<SType> {
+public class LinkedListDeque<SType> implements Deque<SType> {
     /** Čvor duplo uvezane liste. */
     private class ListNode {
         String _desc;
@@ -39,16 +39,19 @@ public class LinkedListDeque<SType> {
     }
 
     /** Provjerava da li je lista prazna. */
+    @Override
     public boolean isEmpty() {
         return _size == 0;
     }
 
     /** Vraća trenutnu veličinu liste. */
+    @Override
     public int size() {
         return _size;
     }
 
     /** Dodaje novi čvor na početak liste. */
+    @Override
     public void addFirst(SType item) {
         _sentinel._next = new ListNode(item, _sentinel, _sentinel._next);
         _sentinel._next._next._prev = _sentinel._next;
@@ -56,6 +59,7 @@ public class LinkedListDeque<SType> {
     }
 
     /** Dodaje novi čvor na kraj liste. */
+    @Override
     public void addLast(SType item) {
         _sentinel._prev = new ListNode(item, _sentinel._prev, _sentinel);
         _sentinel._prev._prev._next = _sentinel._prev;
@@ -63,6 +67,7 @@ public class LinkedListDeque<SType> {
     }
 
     /** Briše prvi čvor liste. */
+    @Override
     public SType removeFirst() {
         if (_size == 0)
             return null;
@@ -75,6 +80,7 @@ public class LinkedListDeque<SType> {
     }
 
     /** Briše zadnji čvor liste. */
+    @Override
     public SType removeLast() {
         if (_size == 0)
             return null;
@@ -87,6 +93,7 @@ public class LinkedListDeque<SType> {
     }
 
     /** Vraća i-ti item liste. */
+    @Override
     public SType get(int index) {
         if (index >= _size || index < 0)
             return null;
@@ -122,6 +129,7 @@ public class LinkedListDeque<SType> {
     }
 
     /** Printa listu. */
+    @Override
     public void printDeque() {
         out.println(this.toString());
     }
@@ -132,7 +140,7 @@ public class LinkedListDeque<SType> {
     }
 
     /** Uspoređuje listu na jednakost sa drugom listom. */
-    public boolean equals(Object o) {
+    public boolean isEqual(Object o) {
         if (!(o instanceof LinkedListDeque)
             || !(this.checkForClassEquality(o))
             || this.size() != ((LinkedListDeque<?>) o).size())
@@ -147,7 +155,8 @@ public class LinkedListDeque<SType> {
     }
 
     /** Jednostavniji oblik. */
-    public boolean simpleEquals(Object o) {
+    @Override
+    public boolean simpleIsEqual(Object o) {
         if (!(o instanceof LinkedListDeque) || this.size() != ((LinkedListDeque<?>) o).size())
             return false;
         ListNode ptr1 = _sentinel._next;

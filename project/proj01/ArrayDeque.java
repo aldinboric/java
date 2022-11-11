@@ -4,7 +4,7 @@ import static java.lang.System.out;
 import static java.lang.System.arraycopy;
 
 /** Generična niz-lista sa O(1) pristupom, brisanjem i dodavanjem osim u slučaju resize-ovanja. */
-public class ArrayDeque<SType> {
+public class ArrayDeque<SType> implements Deque<SType> {
     private static interface LambdaFunction {
         boolean apply(int size, int arraysize);
     }
@@ -28,17 +28,19 @@ public class ArrayDeque<SType> {
     }
 
     /** Provjerava da li je niz prazan. */
+    @Override
     public boolean isEmpty() {
         return _size == 0;
     }
 
     /** Vraća trenutnu veličinu niza. */
+    @Override
     public int size() {
         return _size;
     }
 
     /** Mijenja veličinu niza. */
-    public void resize(int size) {
+    private void resize(int size) {
         SType[] array = (SType[]) new Object[size];
         int index0 = (array.length - _size) / 2;
         _index0 += 1;
@@ -53,6 +55,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Dodaje novi item na početak niza. */
+    @Override
     public void addFirst(SType item) {
         if (_array.length == _size)
             resize(_array.length * 2);
@@ -63,6 +66,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Dodaje novi item na kraj niza. */
+    @Override
     public void addLast(SType item) {
         if (_array.length == _size)
             resize(_array.length * 2);
@@ -73,6 +77,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Briše prvi item niza. */
+    @Override
     public SType removeFirst() {
         if (_size == 0)
             return null;
@@ -87,6 +92,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Briše posljednji item niza. */
+    @Override
     public SType removeLast() {
         if (_size == 0)
             return null;
@@ -101,6 +107,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Vraća i-ti item niza. */
+    @Override
     public SType get(int index) {
         if (_size == 0)
             return null;
@@ -121,6 +128,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Printa niz. */
+    @Override
     public void printDeque() {
         out.println(this.toString());
     }
@@ -131,7 +139,7 @@ public class ArrayDeque<SType> {
     }
 
     /** Uspoređuje nizove na jednakost. */
-    public boolean equals(Object o) {
+    public boolean isEqual(Object o) {
         if (!(o instanceof ArrayDeque)
             || !(this.checkForClassEquality(o))
             || this.size() != ((ArrayDeque<?>) o).size())
@@ -144,7 +152,8 @@ public class ArrayDeque<SType> {
     }
 
     /** Jednostavniji oblik. */
-    public boolean simpleEquals(Object o) {
+    @Override
+    public boolean simpleIsEqual(Object o) {
         if (!(o instanceof ArrayDeque) || this.size() != ((ArrayDeque<?>) o).size())
             return false;
         for (int i = 0; i < _size; i += 1)
