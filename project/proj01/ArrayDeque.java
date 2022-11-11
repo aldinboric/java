@@ -5,7 +5,7 @@ import static java.lang.System.arraycopy;
 
 /** Generična niz-lista sa O(1) pristupom, brisanjem i dodavanjem osim u slučaju resize-ovanja. */
 public class ArrayDeque<SType> {
-    private interface LambdaFunction {
+    private static interface LambdaFunction {
         boolean apply(int size, int arraysize);
     }
     private static final LambdaFunction checkForResizeDown = (x, y) -> (double) (x - 1) / y < 0.25 && y > 10;
@@ -120,8 +120,36 @@ public class ArrayDeque<SType> {
         return result + ">";
     }
 
-    /* Printa niz. */
+    /** Printa niz. */
     public void printDeque() {
         out.println(this.toString());
+    }
+
+    /** Provjerava na jednakost klasa. */
+    private boolean checkForClassEquality(Object o) {
+        return this.get(0).getClass().toString().equals(((ArrayDeque<?>) o).get(0).getClass().toString());
+    }
+
+    /** Uspoređuje nizove na jednakost. */
+    public boolean equals(Object o) {
+        if (!(o instanceof ArrayDeque)
+            || !(this.checkForClassEquality(o))
+            || this.size() != ((ArrayDeque<?>) o).size())
+                return false;
+        ArrayDeque<SType> oarray = (ArrayDeque<SType>) o;
+        for(int i = 0; i < _size; i += 1)
+            if (this.get(i) != oarray.get(i))
+                return false;
+        return true;
+    }
+
+    /** Jednostavniji oblik. */
+    public boolean simpleEquals(Object o) {
+        if (!(o instanceof ArrayDeque) || this.size() != ((ArrayDeque<?>) o).size())
+            return false;
+        for (int i = 0; i < _size; i += 1)
+            if (!(this.get(i).equals(((ArrayDeque<?>) o).get(i))))
+                return false;
+        return true;
     }
 }

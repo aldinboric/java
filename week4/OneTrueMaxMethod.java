@@ -1,5 +1,7 @@
 package week4;
 
+import java.util.Comparator;
+
 import static java.lang.System.out;
 
 public class OneTrueMaxMethod {

@@ -151,4 +151,32 @@ public class LinkedListDequeTest {
         }
         izmjeriVrijeme(n, time, ops);
     }
+
+    /** Testira liste na jednakost. */
+    @Test
+    public void equalsTest() {
+        LinkedListDeque<Integer> L1 = new LinkedListDeque<>();
+        for (int i = 0; i < 3; L1.addFirst(i), i += 1);
+
+        ArrayDeque<Integer> A1 = new ArrayDeque<>();
+        for (int i = 0; i < 3; A1.addFirst(i), i += 1);
+
+        LinkedListDeque<Integer> L2 = new LinkedListDeque<>();
+        for (int i = 0; i < 3; L2.addFirst(i), i += 1);
+
+        LinkedListDeque<Integer> L3 = new LinkedListDeque<>();
+        for (int i = 3; i > 0; L3.addFirst(i), i -= 1);
+
+        assertFalse(L1.equals(1));
+        assertFalse(L1.equals("Lista"));
+        assertFalse(L1.equals(A1));
+        assertTrue(L1.equals(L2));
+        assertFalse(L1.equals(L3));
+
+        assertFalse(L1.simpleEquals(1));
+        assertFalse(L1.simpleEquals("Lista"));
+        assertFalse(L1.simpleEquals(A1));
+        assertTrue(L1.simpleEquals(L2));
+        assertFalse(L1.simpleEquals(L3));
+    }
 }

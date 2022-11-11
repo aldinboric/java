@@ -1,7 +1,5 @@
 package project.proj01;
 
-import java.util.LinkedList;
-
 import static java.lang.System.out;
 
 /* SType => Static Type. */
@@ -126,5 +124,37 @@ public class LinkedListDeque<SType> {
     /** Printa listu. */
     public void printDeque() {
         out.println(this.toString());
+    }
+
+    /** Provjerava na jednakost klasa. */
+    private boolean checkForClassEquality(Object o) {
+        return this.get(0).getClass().toString().equals(((LinkedListDeque<?>) o).get(0).getClass().toString());
+    }
+
+    /** Uspoređuje listu na jednakost sa drugom listom. */
+    public boolean equals(Object o) {
+        if (!(o instanceof LinkedListDeque)
+            || !(this.checkForClassEquality(o))
+            || this.size() != ((LinkedListDeque<?>) o).size())
+                return false;
+        LinkedListDeque<SType> olist = (LinkedListDeque<SType>) o;
+        ListNode ptr1 = _sentinel._next;
+        ListNode ptr2 = olist._sentinel._next;
+        for(; ptr1 != _sentinel; ptr1 = ptr1._next, ptr2 = ptr2._next)
+            if (ptr1._item != ptr2._item)
+                return false;
+        return true;
+    }
+
+    /** Jednostavniji oblik. */
+    public boolean simpleEquals(Object o) {
+        if (!(o instanceof LinkedListDeque) || this.size() != ((LinkedListDeque<?>) o).size())
+            return false;
+        ListNode ptr1 = _sentinel._next;
+        LinkedListDeque<?>.ListNode ptr2 = ((LinkedListDeque<?>) o)._sentinel._next;
+        for(; ptr1 != _sentinel; ptr1 = ptr1._next, ptr2 = ptr2._next)
+            if (!(ptr1._item.equals(ptr2._item)))
+                return false;
+        return true;
     }
 }

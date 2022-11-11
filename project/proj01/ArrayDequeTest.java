@@ -124,4 +124,32 @@ public class ArrayDequeTest {
                 assertEquals(AL.size() == 0 ? null : AL.remove(AL.size() - 1), ALD.removeLast());
         }
     }
+
+    /** Testira liste na jednakost. */
+    @Test
+    public void equalsTest() {
+        ArrayDeque<Integer> A1 = new ArrayDeque<>();
+        for (int i = 0; i < 3; A1.addFirst(i), i += 1);
+
+        LinkedListDeque<Integer> L1 = new LinkedListDeque<>();
+        for (int i = 0; i < 3; L1.addFirst(i), i += 1);
+
+        ArrayDeque<Integer> A2 = new ArrayDeque<>();
+        for (int i = 0; i < 3; A2.addFirst(i), i += 1);
+
+        ArrayDeque<Integer> A3 = new ArrayDeque<>();
+        for (int i = 3; i > 0; A3.addFirst(i), i -= 1);
+
+        assertFalse(A1.equals(1));
+        assertFalse(A1.equals("Lista"));
+        assertFalse(A1.equals(L1));
+        assertTrue(A1.equals(A2));
+        assertFalse(A1.equals(A3));
+
+        assertFalse(A1.simpleEquals(1));
+        assertFalse(A1.simpleEquals("Lista"));
+        assertFalse(A1.simpleEquals(L1));
+        assertTrue(A1.simpleEquals(A2));
+        assertFalse(A1.simpleEquals(A3));
+    }
 }
