@@ -40,15 +40,11 @@ public class LinkedListDeque<SType> implements Deque<SType> {
 
     /** Provjerava da li je lista prazna. */
     @Override
-    public boolean isEmpty() {
-        return _size == 0;
-    }
+    public boolean isEmpty() { return _size == 0; }
 
     /** Vraća trenutnu veličinu liste. */
     @Override
-    public int size() {
-        return _size;
-    }
+    public int size() { return _size; }
 
     /** Dodaje novi čvor na početak liste. */
     @Override
@@ -120,6 +116,17 @@ public class LinkedListDeque<SType> implements Deque<SType> {
         return new HelperCl().helperFn(_sentinel._next, index);
     }
 
+    /** Obrće listu. */
+    public void reverse() {
+        ListNode ptrFront = _sentinel._next;
+        ListNode ptrBack = _sentinel._prev;
+        for (int i = 0; i < _size / 2; i += 1, ptrFront = ptrFront._next, ptrBack = ptrBack._prev) {
+            SType tmp = ptrFront._item;;
+            ptrFront._item = ptrBack._item;
+            ptrBack._item = tmp;
+        }
+    }
+
     /** Vraća listu u obliku stringa. */
     @Override
     public String toString() {
@@ -130,9 +137,7 @@ public class LinkedListDeque<SType> implements Deque<SType> {
 
     /** Printa listu. */
     @Override
-    public void printDeque() {
-        out.println(this.toString());
-    }
+    public void printDeque() { out.println(this.toString()); }
 
     /** Provjerava na jednakost klasa. */
     private boolean checkForClassEquality(Object o) {

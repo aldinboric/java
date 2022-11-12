@@ -27,26 +27,6 @@ public class ComparatorDemo2 {
         }
     }
 
-    public static class Cat {
-        private int size;
-        private String name;
-
-        public Cat(int s, String str) {
-            size = s;
-            name = str;
-        }
-    }
-
-    public static class Human {
-        private int size;
-        private String name;
-
-        public Human(int s, String str) {
-            size = s;
-            name = str;
-        }
-    }
-
     public static Object largestObject(Object[] objectArray, Comparator c) {
         int maxIndex = 0;
         for (int i = 1; i < objectArray.length; i += 1)

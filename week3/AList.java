@@ -18,6 +18,16 @@ public class AList<T> {
         size += 1;
     }
 
+    public void insert(T item, int index) {
+        if (size == array.length)
+            resize(array.length * 2);
+        T tmp = array[index];
+        array[index] = item;
+        arraycopy(array, index + 1, array, index + 2, size - (index + 1));
+        array[index + 1] = tmp;
+        size += 1;
+    }
+
     public T getLast() {
         return array[size - 1];
     }
@@ -34,6 +44,16 @@ public class AList<T> {
         T item = array[size - 1];
         array[size - 1] = null;
         size -= 1;
+        if ((double) size / array.length < 0.25)
+            resize(array.length / 2);
+        return item;
+    }
+
+    public T remove(int index) {
+        T item = array[index];
+        array[index] = null;
+        size -= 1;
+        arraycopy(array, index + 1, array, index, size - index);
         if ((double) size / array.length < 0.25)
             resize(array.length / 2);
         return item;

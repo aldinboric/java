@@ -5,9 +5,7 @@ import static java.lang.System.arraycopy;
 
 /** Generična niz-lista sa O(1) pristupom, brisanjem i dodavanjem osim u slučaju resize-ovanja. */
 public class ArrayDeque<SType> implements Deque<SType> {
-    private static interface LambdaFunction {
-        boolean apply(int size, int arraysize);
-    }
+    private static interface LambdaFunction { boolean apply(int size, int arraysize); }
     private static final LambdaFunction checkForResizeDown = (x, y) -> (double) (x - 1) / y < 0.25 && y > 10;
     private SType[] _array;
     private int _size;
@@ -23,34 +21,26 @@ public class ArrayDeque<SType> implements Deque<SType> {
     }
 
     /** Vraća niz. */
-    public SType[] getArray() {
-        return _array;
-    }
+    public SType[] getArray() { return _array; }
 
     /** Provjerava da li je niz prazan. */
     @Override
-    public boolean isEmpty() {
-        return _size == 0;
-    }
+    public boolean isEmpty() { return _size == 0; }
 
     /** Vraća trenutnu veličinu niza. */
     @Override
-    public int size() {
-        return _size;
-    }
+    public int size() { return _size; }
 
     /** Mijenja veličinu niza. */
     private void resize(int size) {
         SType[] array = (SType[]) new Object[size];
-        int index0 = (array.length - _size) / 2;
-        _index0 += 1;
+        int index0 = (array.length - _size) / 2; _index0 += 1;
         for (int i = 0; i < _size; i += 1, _index0 += 1, index0 += 1) {
             if (_index0 == _array.length)
                 _index0 = 0;
             array[index0] = _array[_index0];
         }
-        _index1 = index0;
-        _index0 = (index0 - _size) - 1;
+        _index1 = index0; _index0 = (index0 - _size) - 1;
         _array = array;
     }
 
@@ -112,7 +102,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
         if (_size == 0)
             return null;
         index = index + (_index0 + 1) >= _array.length ? (index + (_index0 + 1)) - _array.length
-                                                       : index + (_index0 + 1);
+                                                       :  index + (_index0 + 1);
         return _array[index];
     }
 
@@ -129,9 +119,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
 
     /** Printa niz. */
     @Override
-    public void printDeque() {
-        out.println(this.toString());
-    }
+    public void printDeque() { out.println(this.toString()); }
 
     /** Provjerava na jednakost klasa. */
     private boolean checkForClassEquality(Object o) {
