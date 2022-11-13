@@ -1,6 +1,8 @@
 package project.proj01;
 
-public interface Deque<T> {
+import java.util.Iterator;
+
+public interface Deque<T> extends Iterable<T> {
     boolean isEmpty();
     int size();
     void addFirst(T item);

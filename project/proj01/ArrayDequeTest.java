@@ -2,7 +2,7 @@ package project.proj01;
 
 import org.junit.Test;
 import java.util.ArrayList;
-import java.util.ArrayList;
+import java.util.Iterator;
 import edu.princeton.cs.algs4.StdRandom;
 
 import static org.junit.Assert.*;
@@ -151,5 +151,21 @@ public class ArrayDequeTest {
         assertFalse(A1.simpleIsEqual(L1));
         assertTrue(A1.simpleIsEqual(A2));
         assertFalse(A1.simpleIsEqual(A3));
+    }
+
+    /** Testira iterator niza. */
+    @Test
+    public void testIterator() {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+        for (int i = 1; i < 6; A.addLast(i), i += 1);
+
+        for (int x : A)
+            out.print(x + " ");
+        out.println();
+
+        Iterator<Integer> iterA = A.iterator();
+        while (iterA.hasNext())
+            out.print(iterA.next() + " ");
+        out.println();
     }
 }

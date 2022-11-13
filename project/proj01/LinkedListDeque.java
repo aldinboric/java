@@ -1,5 +1,7 @@
 package project.proj01;
 
+import java.util.Iterator;
+
 import static java.lang.System.out;
 
 /* SType => Static Type. */
@@ -170,5 +172,25 @@ public class LinkedListDeque<SType> implements Deque<SType> {
             if (!(ptr1._item.equals(ptr2._item)))
                 return false;
         return true;
+    }
+
+    /** Vraća iterator liste. */
+    @Override
+    public Iterator<SType> iterator() {
+        class IteratorObject implements Iterator<SType> {
+            private ListNode ptr = _sentinel._next;
+            @Override
+            public boolean hasNext() {
+                return ptr != _sentinel;
+            }
+
+            @Override
+            public SType next() {
+                SType tmp = ptr._item;
+                ptr = ptr._next;
+                return tmp;
+            }
+        }
+        return new IteratorObject();
     }
 }

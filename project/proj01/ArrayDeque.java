@@ -1,5 +1,7 @@
 package project.proj01;
 
+import java.util.Iterator;
+
 import static java.lang.System.out;
 import static java.lang.System.arraycopy;
 
@@ -11,6 +13,8 @@ public class ArrayDeque<SType> implements Deque<SType> {
     private int _size;
     private int _index0;
     private int _index1;
+
+    private static final int _FACTOR = 2;
 
     /** Konstruktor za prazan niz početne veličine osam. */
     public ArrayDeque() {
@@ -48,7 +52,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
     @Override
     public void addFirst(SType item) {
         if (_array.length == _size)
-            resize(_array.length * 2);
+            resize(_array.length * _FACTOR);
         else if (_index0 == -1)
             _index0 = _array.length - 1;
         _array[_index0] = item;
@@ -59,7 +63,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
     @Override
     public void addLast(SType item) {
         if (_array.length == _size)
-            resize(_array.length * 2);
+            resize(_array.length * _FACTOR);
         else if (_index1 == _array.length)
             _index1 = 0;
         _array[_index1] = item;
@@ -72,7 +76,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
         if (_size == 0)
             return null;
         else if (checkForResizeDown.apply(_size, _array.length))
-            resize(_array.length / 2);
+            resize(_array.length / _FACTOR);
         else if (_index0 == _array.length - 1 && _size > 0)
             _index0 = -1;
         _index0 += 1; _size -= 1;
@@ -87,7 +91,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
         if (_size == 0)
             return null;
         else if (checkForResizeDown.apply(_size, _array.length))
-            resize(_array.length / 2);
+            resize(_array.length / _FACTOR);
         else if (_index1 == 0 && _size > 0)
             _index1 = _array.length;
         _index1 -= 1; _size -= 1;
@@ -148,5 +152,27 @@ public class ArrayDeque<SType> implements Deque<SType> {
             if (!(this.get(i).equals(((ArrayDeque<?>) o).get(i))))
                 return false;
         return true;
+    }
+
+    /** Vraća iterator niza. */
+    @Override
+    public Iterator<SType> iterator() {
+        class IteratorObject implements Iterator<SType> {
+            private int index = _index0 + 1;
+            private int size = 0;
+            @Override
+            public boolean hasNext() {
+                return size < _size;
+            }
+            @Override
+            public SType next() {
+                if (index == _array.length)
+                    index = 0;
+                SType tmp = _array[index];
+                index += 1; size += 1;
+                return tmp;
+            }
+        }
+        return new IteratorObject();
     }
 }

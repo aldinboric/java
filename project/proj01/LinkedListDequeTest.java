@@ -1,5 +1,6 @@
 package project.proj01;
 
+import static java.lang.System.out;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -7,6 +8,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class LinkedListDequeTest {
@@ -178,5 +180,21 @@ public class LinkedListDequeTest {
         assertFalse(L1.simpleIsEqual(A1));
         assertTrue(L1.simpleIsEqual(L2));
         assertFalse(L1.simpleIsEqual(L3));
+    }
+
+    /** Testira iterator liste. */
+    @Test
+    public void testIterator() {
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        for (int i = 1; i < 6; L.addLast(i), i += 1);
+
+        for (int x : L)
+            out.print(x + " ");
+        out.println();
+
+        Iterator<Integer> iterL = L.iterator();
+        while (iterL.hasNext())
+            out.print(iterL.next() + " ");
+        out.println();
     }
 }
