@@ -156,7 +156,7 @@ public class LinkedListDequeTest {
 
     /** Testira liste na jednakost. */
     @Test
-    public void isEqualTest() {
+    public void equalsTest() {
         LinkedListDeque<Integer> L1 = new LinkedListDeque<>();
         for (int i = 0; i < 3; L1.addFirst(i), i += 1);
 
@@ -169,17 +169,11 @@ public class LinkedListDequeTest {
         LinkedListDeque<Integer> L3 = new LinkedListDeque<>();
         for (int i = 3; i > 0; L3.addFirst(i), i -= 1);
 
-        assertFalse(L1.isEqual(1));
-        assertFalse(L1.isEqual("Lista"));
-        assertFalse(L1.isEqual(A1));
-        assertTrue(L1.isEqual(L2));
-        assertFalse(L1.isEqual(L3));
-
-        assertFalse(L1.simpleIsEqual(1));
-        assertFalse(L1.simpleIsEqual("Lista"));
-        assertFalse(L1.simpleIsEqual(A1));
-        assertTrue(L1.simpleIsEqual(L2));
-        assertFalse(L1.simpleIsEqual(L3));
+        assertFalse(L1.equals(1));
+        assertFalse(L1.equals("Lista"));
+        assertFalse(L1.equals(A1));
+        assertTrue(L1.equals(L2));
+        assertFalse(L1.equals(L3));
     }
 
     /** Testira iterator liste. */
