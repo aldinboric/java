@@ -40,10 +40,6 @@ public class LinkedListDeque<SType> implements Deque<SType> {
         _size = 0;
     }
 
-    /** Provjerava da li je lista prazna. */
-    @Override
-    public boolean isEmpty() { return _size == 0; }
-
     /** Vraća trenutnu veličinu liste. */
     @Override
     public int size() { return _size; }
@@ -146,24 +142,9 @@ public class LinkedListDeque<SType> implements Deque<SType> {
         return this.get(0).getClass().toString().equals(((LinkedListDeque<?>) o).get(0).getClass().toString());
     }
 
-    /** Uspoređuje listu na jednakost sa drugom listom. */
-    public boolean isEqual(Object o) {
-        if (!(o instanceof LinkedListDeque)
-            || !(this.checkForClassEquality(o))
-            || this.size() != ((LinkedListDeque<?>) o).size())
-                return false;
-        LinkedListDeque<SType> olist = (LinkedListDeque<SType>) o;
-        ListNode ptr1 = _sentinel._next;
-        ListNode ptr2 = olist._sentinel._next;
-        for(; ptr1 != _sentinel; ptr1 = ptr1._next, ptr2 = ptr2._next)
-            if (ptr1._item != ptr2._item)
-                return false;
-        return true;
-    }
-
     /** Jednostavniji oblik. */
     @Override
-    public boolean simpleIsEqual(Object o) {
+    public boolean equals(Object o) {
         if (!(o instanceof LinkedListDeque) || this.size() != ((LinkedListDeque<?>) o).size())
             return false;
         ListNode ptr1 = _sentinel._next;

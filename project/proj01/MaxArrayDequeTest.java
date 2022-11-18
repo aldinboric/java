@@ -15,5 +15,11 @@ public class MaxArrayDequeTest {
         for (int i = 1; i < 15; D1.addLast(i), i += 1);
         D1.printDeque();
         out.println(D1.max());
+
+        MaxDeque<String> D2 = new MaxArrayDeque<>(new Size<String>());
+        D2.addLast("Aldin");
+        D2.addLast("Aldi");
+        D2.addLast("Ald");
+        out.println(D2.max(new Size<String>()));
     }
 }

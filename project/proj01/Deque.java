@@ -3,7 +3,8 @@ package project.proj01;
 import java.util.Iterator;
 
 public interface Deque<T> extends Iterable<T> {
-    boolean isEmpty();
+    /** Provjerava da li je niz prazan. */
+    default boolean isEmpty() { return this.size() == 0; }
     int size();
     void addFirst(T item);
     void addLast(T item);
@@ -12,5 +13,4 @@ public interface Deque<T> extends Iterable<T> {
     T get(int index);
     String toString();
     void printDeque();
-    boolean simpleIsEqual(Object o);
 }

@@ -2,7 +2,10 @@ package week4;
 
 import edu.princeton.cs.algs4.ST;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import static java.lang.System.out;
 import static java.lang.System.arraycopy;
@@ -16,6 +19,13 @@ public class ArraySet<SType> implements Iterable<SType> {
     public ArraySet() {
         _array = (SType[]) new Object[100];
         _size = 0;
+    }
+
+    public static <T> ArraySet<T> of(T... vargs) {
+        ArraySet<T> arr = new ArraySet<>();
+        for (T item : vargs)
+            arr.add(item);
+        return arr;
     }
 
     public int size() {
@@ -71,8 +81,36 @@ public class ArraySet<SType> implements Iterable<SType> {
         }
     }
 
+    @Override
     public Iterator<SType> iterator() {
         return new ArraySetIterator();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < _size - 1; result.append(_array[i]).append(" "), i += 1);
+        return result.append(_array[_size - 1]).append("]").toString();
+    }
+
+    private String toString2() {
+        List<String> listOfItems = new ArrayList<>();
+        for (SType item : this)
+            listOfItems.add(item.toString());
+        return "[" + String.join(", ", listOfItems) + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof ArraySet newArraySet) {
+            if (this._size != newArraySet._size)
+                return false;
+            for (SType item : _array)
+                if (!(newArraySet.contains(item)))
+                    return false;
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -85,5 +123,6 @@ public class ArraySet<SType> implements Iterable<SType> {
             out.println(arrIter.next());
         for (int x : arr)
             out.println(x);
+        out.println(arr);
     }
 }

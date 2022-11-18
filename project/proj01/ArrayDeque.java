@@ -27,10 +27,6 @@ public class ArrayDeque<SType> implements Deque<SType> {
     /** Vraća niz. */
     public SType[] getArray() { return _array; }
 
-    /** Provjerava da li je niz prazan. */
-    @Override
-    public boolean isEmpty() { return _size == 0; }
-
     /** Vraća trenutnu veličinu niza. */
     @Override
     public int size() { return _size; }
@@ -113,7 +109,7 @@ public class ArrayDeque<SType> implements Deque<SType> {
     /** Vraća niz u obliku stringa. */
     @Override
     public String toString() {
-        String result = "<";
+        String result = "< ";
         int index0 = _index0 + 1;
         for (int i = 0; i < _size; i += 1, result += _array[index0] + " ", index0 += 1)
             if (index0 == _array.length)
@@ -130,22 +126,9 @@ public class ArrayDeque<SType> implements Deque<SType> {
         return this.get(0).getClass().toString().equals(((ArrayDeque<?>) o).get(0).getClass().toString());
     }
 
-    /** Uspoređuje nizove na jednakost. */
-    public boolean isEqual(Object o) {
-        if (!(o instanceof ArrayDeque)
-            || !(this.checkForClassEquality(o))
-            || this.size() != ((ArrayDeque<?>) o).size())
-                return false;
-        ArrayDeque<SType> oarray = (ArrayDeque<SType>) o;
-        for(int i = 0; i < _size; i += 1)
-            if (this.get(i) != oarray.get(i))
-                return false;
-        return true;
-    }
-
     /** Jednostavniji oblik. */
     @Override
-    public boolean simpleIsEqual(Object o) {
+    public boolean equals(Object o) {
         if (!(o instanceof ArrayDeque) || this.size() != ((ArrayDeque<?>) o).size())
             return false;
         for (int i = 0; i < _size; i += 1)
